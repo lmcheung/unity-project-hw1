@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public float speed;
-    private int count;
-    public Text countText;
+    private float timer;
+    private int seconds;
+    private int surviveTimer;
+    public Text timerText;
     public Text winText;
     public Button restartButton;
 
@@ -17,10 +19,28 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        count = 0;
-        countText.text = "Count: " + count.ToString();
+        timer = 0.0f;
+        surviveTimer = 60;
+        timerText.text = "Timer: " + surviveTimer.ToString();
         winText.text = "";
         restartButton.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (seconds != 60) // Keeps counting until timer has hit 60 seconds. 
+        {
+            timer += Time.deltaTime;
+            seconds = (int)timer;
+        } else if (seconds == 60)
+        {
+            winText.text = "You win!"; // displays win text
+            restartButton.gameObject.SetActive(true); // show restart button
+        }
+        
+        // Displays the countdown timer 
+        timerText.text = "Timer: " + (surviveTimer - seconds).ToString();
+        
     }
 
     // FixedUpdate is in sync with physics engine
@@ -31,22 +51,6 @@ public class PlayerController : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2d.velocity = movement * speed;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-            other.gameObject.SetActive(false); //disappear from scene
-            count++;
-            countText.text = "Count: " + count.ToString();
-        }
-
-        if (count >= 12) 
-        { 
-            winText.text = "You win!";
-            restartButton.gameObject.SetActive(true); // show button
-        }
     }
 
     public void OnRestartButtonPress()
