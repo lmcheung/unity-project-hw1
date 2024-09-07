@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+public class PickupController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private Vector3 randomMovement;
