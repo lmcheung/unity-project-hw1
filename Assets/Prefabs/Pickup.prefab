@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7044416951590332133}
   - component: {fileID: 7044416951590332134}
   - component: {fileID: 7044416951590332135}
-  - component: {fileID: 4493233987459858187}
+  - component: {fileID: 2588941215343759306}
   m_Layer: 0
   m_Name: Pickup
   m_TagString: PickUp
@@ -94,7 +94,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -112,16 +112,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a933f26ae099e54e8f16b1e9c040add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4493233987459858187
-MonoBehaviour:
+--- !u!50 &2588941215343759306
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7044416951590332136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74bb3d2a58fcd94db8120e6c4ffba33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
