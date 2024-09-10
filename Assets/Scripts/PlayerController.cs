@@ -8,19 +8,44 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public float speed;
-    private int count;
-    public Text countText;
+    private float timer;
+    private int seconds;
+    private int surviveTimer;
+    private bool pauseTimer;
+    public Text timerText;
     public Text winText;
+    public Text loseText;
     public Button restartButton;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        count = 0;
-        countText.text = "Count: " + count.ToString();
+        timer = 0.0f;
+        surviveTimer = 60; // sets the default timer to count down from 
+        timerText.text = "Timer: " + surviveTimer.ToString(); // DIsplays the timer
+        pauseTimer = false; // Boolean flag to handle pausing the timer
         winText.text = "";
+        loseText.text = "";
         restartButton.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if ((seconds != 60) && (pauseTimer != true)) // Keeps counting until timer has hit 60 seconds. 
+        {
+            timer += Time.deltaTime;
+            seconds = (int)timer;
+        } else if (seconds == 60) // 60 seconds has elapse
+        {
+            winText.text = "You win!"; // displays win text
+            restartButton.gameObject.SetActive(true); // show restart button
+            pauseTimer = true; // Pauses the timer
+        }
+        
+        // Displays the countdown timer 
+        timerText.text = "Timer: " + (surviveTimer - seconds).ToString();
+        
     }
 
     // FixedUpdate is in sync with physics engine
@@ -30,22 +55,16 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        rb2d.AddForce(movement * speed);
+        rb2d.velocity = movement * speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        if (other.gameObject.CompareTag("PickUp"))
+        if ((col.gameObject.CompareTag("PickUp")) && (pauseTimer != true))
         {
-            other.gameObject.SetActive(false); //disappear from scene
-            count++;
-            countText.text = "Count: " + count.ToString();
-        }
-
-        if (count >= 12) 
-        { 
-            winText.text = "You win!";
-            restartButton.gameObject.SetActive(true); // show button
+            loseText.text = "Game Over!";
+            restartButton.gameObject.SetActive(true);
+            pauseTimer = true; // Pauses the timer
         }
     }
 
