@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿// Author: Lok Cheung
+// Date: September 22, 2024
+// Handles the camera logic 
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

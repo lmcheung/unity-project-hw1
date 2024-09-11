@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PickUp
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -47,6 +48,9 @@ TagManager:
     locked: 0
   - name: Pickups
     uniqueID: 407342957
+    locked: 0
+  - name: Powerup
+    uniqueID: 2920620885
     locked: 0
   - name: Player
     uniqueID: 3393056131

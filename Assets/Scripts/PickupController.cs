@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿// Author: Lok Cheung
+// Date: September 22, 2024
+// Handles the random movement of the PickUp logic
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +15,14 @@ public class PickupController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        // Random movements of Pickup objects
         randomMovement = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
     }
 
     // FixedUpdate is in sync with physics engine
     void FixedUpdate()
     {
+        // Control speed of PickUp objects.
         rb2d.velocity = randomMovement * 2.0f;
     }
 
